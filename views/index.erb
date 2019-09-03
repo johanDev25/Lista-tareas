@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Lista de Tareas</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<!-- Custom styles for this template -->
+	<link href="form-validation.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+	<div class="container">
+		<div class="py-5 text-center">
+			<a href="/create" class="btn btn-info" role="button" aria-pressed="true">Crear Tarea</a>
+		</div>
+
+		<div class="row">
+
+			<div class="col-12">
+				<table class="table table-striped table-dark">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Tarea</th>
+							<th scope="col">Actualizar</td>
+								<th scope="col">Eliminar</th>
+								<th scope="col">Completada</td>
+								</tr>
+							</thead>
+							<tbody>
+								<% @tareas.each do |tarea|%>
+								<tr>
+									<td><%= tarea["id"] %></td>
+									<th scope="row"><%= tarea["title"] %></th>
+									<td><form action="/tarea/<%= tarea["id"] %>" method="post">
+										<input type="hidden" name="_method" value="PUT">
+										<input type="submit" class="btn btn-success" value="Tarea Terminada?">      
+									</form>
+								</td>
+								<td><form action="/eliminar/<%= tarea["id"] %>" method="post">
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="submit" class="btn btn-danger" value="Borrar Tarea?">
+								</form>
+							</td>
+							<td>
+								<%if tarea["done"] == true %>
+								<i style=" font-size: 2.5rem;" class="far fa-thumbs-up"></i>
+								<%else%>
+								<i style=" font-size: 2.5rem;" class="far fa-thumbs-down"></i>
+								<%end%>
+							</td> 
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
+		<footer class="my-5 pt-5 text-muted text-center text-small">
+			<p class="mb-1">&copy; 2019 Mkae It Real</p>
+			<ul class="list-inline">
+				<li class="list-inline-item"><a href="#">Privacy</a></li>
+				<li class="list-inline-item"><a href="#">Terms</a></li>
+				<li class="list-inline-item"><a href="#">Support</a></li>
+			</ul>
+		</footer>
+	</div>
+	<script src="https://kit.fontawesome.com/18c2d51a46.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
